@@ -31,9 +31,13 @@ namespace MVCBook.Controllers
         [HttpPost]
         public ActionResult Create(Book book)
         {
+            if (ModelState.IsValid)
+            {
+                context.Books.Add(book);
+                context.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-            context.Books.Add(book);
-            context.SaveChanges();
 
             return View("Create", book);
         }
